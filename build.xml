@@ -7,6 +7,7 @@
   <property name="sdk.version" value="1.2.5"/>
   <property name="appengine.sdk.url" value="http://googleappengine.googlecode.com/files/appengine-java-sdk-${sdk.version}.zip"/>
   <property name="compojure.url" value="http://github.com/weavejester/compojure/zipball/0.3.1/weavejester-compojure-97b38f2.zip"/>
+  <property name="appengine-clj.url" value="http://cloud.github.com/downloads/duelinmarkers/appengine-clj/appengine-clj.jar" />
   <property name="commons.codec.version" value="1.3"/>
   <property name="commons.fileupload.version" value="1.2.1"/>
   <property name="commons.io.version" value="1.4"/>
@@ -51,6 +52,11 @@
     <get usetimestamp="true" src="${appengine.sdk.url}" dest="appengine-sdk.zip"/>
   </target>
 
+  <target name="appengine-clj" description="Download appengine-clj">
+    <get usetimestamp="true" src="${appengine-clj.url}" dest="appengine-clj.jar"/>
+  </target>
+
+
   <target name="compojure">
     <get usetimestamp="true" src="${compojure.url}" dest="compojure.zip"/>
 	<unzip src="compojure.zip" dest="." />
@@ -79,7 +85,7 @@
 	<replaceregexp file="war/WEB-INF/appengine-web.xml" match="VERSIONNUMBER" replace="${version.number}" byline="true"/>
   </target>
 
-  <target name="setup" depends="sdk,compojure">
+  <target name="setup" depends="sdk,compojure,appengine-clj">
 	<mkdir dir="${user.dir}/${name}"/>
 	<mkdir dir="${user.dir}/${name}/src/"/>
 	<mkdir dir="${user.dir}/${name}/src/${name}/"/>
@@ -95,6 +101,7 @@
 	<copy todir="${user.dir}/${name}/war/WEB-INF/lib/">
 	  <fileset dir="${user.dir}/${name}/appengine-java-sdk-${sdk.version}/lib/user/" />
 	</copy>
+	<copy file="appengine-clj.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/appengine-clj.jar" />
 	<copy file="weavejester-compojure-97b38f2/deps/clojure.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/clojure.jar" />
 	<copy file="weavejester-compojure-97b38f2/deps/clojure-contrib.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/clojure-contrib.jar" />
 	<copy file="weavejester-compojure-97b38f2/deps/commons-codec-${commons.codec.version}.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/commons-codec-${commons.codec.version}.jar" />
