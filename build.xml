@@ -11,6 +11,7 @@
   <property name="commons.codec.version" value="1.3"/>
   <property name="commons.fileupload.version" value="1.2.1"/>
   <property name="commons.io.version" value="1.4"/>
+  <property name="dev.port" value="8080"/>
   <property file="project.properties"/>
 
   <property name="classes" location="war/WEB-INF/classes/"/>
@@ -29,7 +30,7 @@
     </fileset>
   </path>
 
-  <target name="compile" depends="web.xml,appengine-web.xml">
+  <target name="compile" depends="">
     <java classname="clojure.lang.Compile" classpathref="project.classpath" failonerror="true">
       <sysproperty key="clojure.compile.path" value="${classes}" />
 	  <arg value="${name}.servlet" />
@@ -42,7 +43,7 @@
             classpath="appengine-java-sdk-${sdk.version}/lib/appengine-tools-api.jar"
             fork="true" failonerror="true">
         <arg value="com.google.appengine.tools.development.DevAppServerMain"/>
-        <arg value="--port=8080"/>
+        <arg value="--port=${dev.port}"/>
         <arg value="--address=localhost"/>
         <arg value="war"/>
       </java>
@@ -105,7 +106,9 @@
 	<copy file="weavejester-compojure-97b38f2/deps/clojure.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/clojure.jar" />
 	<copy file="weavejester-compojure-97b38f2/deps/clojure-contrib.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/clojure-contrib.jar" />
 	<copy file="weavejester-compojure-97b38f2/deps/commons-codec-${commons.codec.version}.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/commons-codec-${commons.codec.version}.jar" />
-	<copy file="weavejester-compojure-97b38f2/deps/commons-fileupload-${commons.fileupload.version}.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/commons-fileupload-${commons.fileupload.version}.jar" />
+    <!--
+    <copy file="weavejester-compojure-97b38f2/deps/commons-fileupload-${commons.fileupload.version}.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/commons-fileupload-${commons.fileupload.version}.jar" />
+    -->
 	<copy file="weavejester-compojure-97b38f2/deps/commons-io-${commons.io.version}.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/commons-io-${commons.io.version}.jar" />
 	<copy file="weavejester-compojure-97b38f2/compojure.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/compojure.jar" />
 	<replaceregexp file="${user.dir}/${name}/project.properties"
@@ -115,6 +118,8 @@
 	<copy file=".servlet.clj.tpl" tofile="${user.dir}/${name}/src/${name}/.servlet.clj.tpl"/>
 	<copy file=".servlet.clj.tpl" tofile="${user.dir}/${name}/src/${name}/servlet.clj"/>
 	<replaceregexp file="${user.dir}/${name}/src/${name}/servlet.clj" match="NAME" replace="${name}" byline="true"/>
+	<ant dir="${user.dir}/${name}" target="web.xml" />
+	<ant dir="${user.dir}/${name}" target="appengine-web.xml" />
   </target>
 
 </project>
