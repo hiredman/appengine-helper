@@ -28,14 +28,14 @@
     </fileset>
   </path>
 
-  <target name="compile" depends="">
+  <target name="compile" depends="web.xml,appengine-web.xml">
     <java classname="clojure.lang.Compile" classpathref="project.classpath" failonerror="true">
       <sysproperty key="clojure.compile.path" value="${classes}" />
 	  <arg value="${name}.servlet" />
     </java>
   </target>
 
-  <target name="runserver" depends="compile,web.xml,appengine-web.xml"
+  <target name="runserver" depends="compile"
       description="Starts the development server.">
       <java classname="com.google.appengine.tools.KickStart"
             classpath="appengine-java-sdk-${sdk.version}/lib/appengine-tools-api.jar"
@@ -105,6 +105,7 @@
                          match="name=(.*)"
 						 replace="name=${name}"
                          byline="true"/>
+	<copy file=".servlet.clj.tpl" tofile="${user.dir}/${name}/src/${name}/.servlet.clj.tpl"/>
 	<copy file=".servlet.clj.tpl" tofile="${user.dir}/${name}/src/${name}/servlet.clj"/>
 	<replaceregexp file="${user.dir}/${name}/src/${name}/servlet.clj" match="NAME" replace="${name}" byline="true"/>
   </target>
