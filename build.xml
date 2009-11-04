@@ -57,10 +57,14 @@
     <get usetimestamp="true" src="${appengine-clj.url}" dest="appengine-clj.jar"/>
   </target>
 
+  <target name="patch-compojure">
+     <patch patchfile="compojure.patch" dir="weavejester-compojure-97b38f2"/>
+  </target>
 
   <target name="compojure">
     <get usetimestamp="true" src="${compojure.url}" dest="compojure.zip"/>
 	<unzip src="compojure.zip" dest="." />
+	<antcall target="patch-compojure" />
 	<ant dir="weavejester-compojure-97b38f2/" target="deps" />
 	<ant dir="weavejester-compojure-97b38f2/" />
   </target>
@@ -96,7 +100,7 @@
 	<mkdir dir="${user.dir}/${name}/war/WEB-INF/lib/"/>
 	<unzip src="appengine-sdk.zip" dest="${user.dir}/${name}/"/>
 	<copy file="${ant.file}" tofile="${user.dir}/${name}/build.xml"/>
-	<copy file="project.properties" tofile="${user.dir}/${name}/project.properties"/>
+	<copy file=".project.properties" tofile="${user.dir}/${name}/project.properties"/>
 	<copy file=".web.xml.tpl" tofile="${user.dir}/${name}/.web.xml.tpl"/>
 	<copy file=".appengine-web.xml.tpl" tofile="${user.dir}/${name}/.appengine-web.xml.tpl"/>
 	<copy todir="${user.dir}/${name}/war/WEB-INF/lib/">

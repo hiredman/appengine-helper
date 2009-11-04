@@ -1,0 +1,17 @@
+*** src/compojure/http.clj	2009-11-04 13:40:55.000000000 -0800
+--- src/compojure/http.clj.new	2009-11-04 13:40:48.000000000 -0800
+***************
+*** 14,19 ****
+  (immigrate
+    'compojure.http.helpers
+    'compojure.http.middleware
+!   'compojure.http.multipart
+    'compojure.http.routes
+    'compojure.http.servlet)
+--- 14,19 ----
+  (immigrate
+    'compojure.http.helpers
+    'compojure.http.middleware
+!   ;'compojure.http.multipart
+    'compojure.http.routes
+    'compojure.http.servlet)
