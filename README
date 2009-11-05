@@ -3,3 +3,5 @@ ant -build somewhere/build.xml -Dname=someproject setup
 somewhere being where the checkout of this code lives, someproject
 being the name of the project you run that, and a directory someproject
 will be created with all the app engine jars and what not
+
+code lives in src/name/servlet.clj where name is the name of the project
