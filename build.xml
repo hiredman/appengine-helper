@@ -49,7 +49,7 @@
       </java>
   </target>
 
-  <target name="deploy" depends="compile"
+  <target name="deploy" depends="compile,web.xml,appengine-web.xml"
       description="Deploy to GAE.">
       <java classname="com.google.appengine.tools.admin.AppCfg"
             classpath="appengine-java-sdk-${sdk.version}/lib/appengine-tools-api.jar"
@@ -120,7 +120,7 @@
 	<copy file="weavejester-compojure-97b38f2/deps/clojure.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/clojure.jar" />
 	<copy file="weavejester-compojure-97b38f2/deps/clojure-contrib.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/clojure-contrib.jar" />
 	<copy file="weavejester-compojure-97b38f2/deps/commons-codec-${commons.codec.version}.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/commons-codec-${commons.codec.version}.jar" />
-	<copy file="weavejester-compojure-97b38f2/deps/commons-fileupload-${commons.fileupload.version}.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/commons-fileupload-${commons.fileupload.version}.jar" />
+    <!-- <copy file="weavejester-compojure-97b38f2/deps/commons-fileupload-${commons.fileupload.version}.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/commons-fileupload-${commons.fileupload.version}.jar" /> -->
 	<copy file="weavejester-compojure-97b38f2/deps/commons-io-${commons.io.version}.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/commons-io-${commons.io.version}.jar" />
 	<copy file="weavejester-compojure-97b38f2/compojure.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/compojure.jar" />
 	<replaceregexp file="${user.dir}/${name}/project.properties"
