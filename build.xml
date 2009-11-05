@@ -49,6 +49,16 @@
       </java>
   </target>
 
+  <target name="deploy" depends="compile"
+      description="Deploy to GAE.">
+      <java classname="com.google.appengine.tools.admin.AppCfg"
+            classpath="appengine-java-sdk-${sdk.version}/lib/appengine-tools-api.jar"
+            fork="true" failonerror="true">
+        <arg value="update"/>
+        <arg value="war"/>
+      </java>
+  </target>
+
   <target name="sdk" description="Download appengine sdk">
     <get usetimestamp="true" src="${appengine.sdk.url}" dest="appengine-sdk.zip"/>
   </target>
