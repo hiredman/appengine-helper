@@ -4,7 +4,7 @@
   <property name="display.name" value="${name}"/>
   <property name="application.id" value="${name}"/>
   <property name="version.number" value="1"/>
-  <property name="sdk.version" value="1.2.5"/>
+  <property name="sdk.version" value="1.2.6"/>
   <property name="appengine.sdk.url" value="http://googleappengine.googlecode.com/files/appengine-java-sdk-${sdk.version}.zip"/>
   <property name="compojure.url" value="http://github.com/weavejester/compojure/zipball/0.3.1/weavejester-compojure-97b38f2.zip"/>
   <property name="appengine-clj.url" value="http://cloud.github.com/downloads/duelinmarkers/appengine-clj/appengine-clj.jar" />
