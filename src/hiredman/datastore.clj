@@ -7,7 +7,8 @@
   (with-meta
     (into {} (map #(vector (keyword (key %)) (val %)) (.getProperties entity)))
     {:kind (keyword (.getKind entity))
-     :key (.getKey entity)}))
+     :key (.getKey entity)
+     :entity entity}))
 
 (defn create [map]
   (let [kind (name (:kind (meta map)))
@@ -22,8 +23,7 @@
   nil)
 
 (defn update [map]
-  (delete map)
-  (create map))
+  (entity->map (reduce #(.setProperty %1 (name (first %2)) (second %2)) (:entity (meta map)) map)))
 
 (defn exec [query]
   (-> query (#(.prepare datastore-service %)) .asIterable ((partial map entity->map))))
