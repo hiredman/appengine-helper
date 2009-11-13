@@ -105,7 +105,11 @@
 	<replaceregexp file="war/WEB-INF/appengine-web.xml" match="VERSIONNUMBER" replace="${version.number}" byline="true"/>
   </target>
 
-  <target name="setup" depends="sdk,compojure,appengine-clj">
+  <target name="hiredman">
+    <jar jarfile="hiredman.jar" basedir="src/" />
+  </target>
+
+  <target name="setup" depends="sdk,compojure,appengine-clj,hiredman">
 	<mkdir dir="${user.dir}/${name}"/>
 	<mkdir dir="${user.dir}/${name}/src/"/>
 	<mkdir dir="${user.dir}/${name}/src/${name}/"/>
@@ -121,6 +125,7 @@
 	<copy todir="${user.dir}/${name}/war/WEB-INF/lib/">
 	  <fileset dir="${user.dir}/${name}/appengine-java-sdk-${sdk.version}/lib/user/" />
 	</copy>
+	<copy file="hiredman.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/hiredman.jar" />
 	<copy file="appengine-clj.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/appengine-clj.jar" />
 	<copy file="weavejester-compojure-97b38f2/deps/clojure.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/clojure.jar" />
 	<copy file="weavejester-compojure-97b38f2/deps/clojure-contrib.jar" tofile="${user.dir}/${name}/war/WEB-INF/lib/clojure-contrib.jar" />
