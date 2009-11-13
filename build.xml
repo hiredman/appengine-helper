@@ -1,4 +1,4 @@
-<project name="campcool" default="compile">
+<project name="appengine" default="compile">
 
   <property file="project.properties"/>
   <property name="display.name" value="${name}"/>
@@ -30,11 +30,16 @@
     </fileset>
   </path>
 
-  <target name="compile" depends="">
+  <target name="compile" depends="clean-classes">
     <java classname="clojure.lang.Compile" classpathref="project.classpath" failonerror="true">
       <sysproperty key="clojure.compile.path" value="${classes}" />
 	  <arg value="${name}.servlet" />
     </java>
+  </target>
+
+  <target name="clean-classes">
+    <delete dir="${classes}" />
+    <mkdir dir="${classes}"/>
   </target>
 
   <target name="runserver" depends="compile"
