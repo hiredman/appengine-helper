@@ -1,4 +1,4 @@
-ant -build somewhere/build.xml -Dname=someproject setup
+ant -buildfile somewhere/build.xml -Dname=someproject setup
 
 somewhere being where the checkout of this code lives, someproject
 being the name of the project you run that, and a directory someproject
